@@ -1,0 +1,28 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sketch!</title>
+    <link rel="stylesheet" href="{% static 'studio/style.css' %}">
+</head>
+<body>
+    <div class="app-container">
+        <div class="canvas-container dotted">
+
+            <div class="controls-container">
+                <button class="control-button"><img src="{% static 'studio/icons/pencil.svg' %}"/></button>
+                <button class="control-button"><img src="{% static 'studio/icons/brush.svg' %}"/></button>
+                <button class="control-button"><img src="{% static 'studio/icons/eraser.svg' %}"/></button>
+            </div>
+
+            <div class="canvas">
+               <canvas id="canvas"></canvas>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

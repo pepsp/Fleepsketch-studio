@@ -1,0 +1,114 @@
+/* Estilos generales */
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #91C5D0; /* Azul Claro */
+    opacity: 1;
+    background-image: linear-gradient(135deg, #80a8b8 25%, transparent 25%), 
+                      linear-gradient(225deg, #80a8b8 25%, transparent 25%), 
+                      linear-gradient(45deg, #80a8b8 25%, transparent 25%), 
+                      linear-gradient(315deg, #80a8b8 25%, #91C5D0 25%);
+    background-position: 4vh 0, 4vh 0, 0 0, 0 0;
+    background-size: 8vh 8vh;
+    background-repeat: repeat;
+}
+
+.app-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.canvas-container {
+    display: flex;
+    justify-content: space-between; /* Distribuir espacio entre los elementos hijos */
+    align-items: center; /* Centrar verticalmente */
+    width: 90vw;
+    height: 90vh;
+    background-color: #a7dce6;
+    border-radius: 0.5vw;
+    border: solid 1vw #ff7300;
+    padding: 1vw; /* Añadir padding para que los elementos no toquen el borde */
+    box-sizing: border-box; /* Incluir padding y border en el tamaño total */
+}
+
+.controls-container {
+    display: flex;
+    flex-direction: column; /* Alinear botones en columna */
+    align-items: flex-start; /* Alinear a la izquierda */
+}
+
+.control-button {
+    width: 10vw;
+    height: 10vw; /* Ajustar el alto para que sea cuadrado */
+    margin: 1vh 0;
+    font-size: 1vw;
+    background-color: #ff7300;
+    color: white;
+    border: ridge .5vw #ff7300; /* Quitar el borde sólido */
+    border-radius: 0.5vw;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Para ocultar partes de la imagen que sobresalgan */
+    box-shadow: 0.4vw 0.4vw 0.8vw rgba(0, 0, 0, 0.3), -0.2vw -0.2vw 0.4vw rgba(255, 255, 255, 0.2); /* Sombra para efecto 3D */
+    transition: box-shadow 0.2s ease; /* Transición suave */
+}
+
+.control-button:active {
+    box-shadow: 0.2vw 0.2vw 0.4vw rgba(0, 0, 0, 0.3), -0.1vw -0.1vw 0.2vw rgba(255, 255, 255, 0.2); /* Sombra más pequeña al presionar */
+    transform: translate(0.2vw, 0.2vw); /* Simular la presión del botón */
+}
+
+.control-button img {
+    width: 70%; /* Ajustar el tamaño de la imagen */
+    height: auto; /* Mantener la proporción */
+    object-fit: contain; /* Ajusta la imagen dentro del tamaño especificado manteniendo la proporción */
+}
+
+.canvas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 2vw;
+    background-color: #fff;
+    border-radius: 0.5vw;
+    border: solid .1vw #91C5D0;
+    width: 960px;
+    height: 720px;
+}
+
+.boxed {
+    opacity: 0.8;
+    background-image: linear-gradient(#737373 1px, transparent 1px), 
+                      linear-gradient(to right, #737373 1px, #fff 1px);
+    background-size: 20px 20px;
+}
+
+.lines-horizontal {
+    opacity: 0.8;
+    background-size: 20px 20px;
+    background-image: repeating-linear-gradient(0deg, #737373, #737373 1px, #fff 1px, #fff);
+}
+
+.lines-vertical {
+    opacity: 0.8;
+    background-size: 20px 20px;
+    background-image: repeating-linear-gradient(to right, #737373, #737373 1px, #fff 1px, #fff);
+}
+
+.dotted {
+    opacity: 1;
+    background-image: radial-gradient(#858585 5%, transparent 5%);
+    background-size: 5vh 5vh; /* Tamaño de los puntos */
+    background-repeat: repeat;
+}
