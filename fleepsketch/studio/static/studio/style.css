@@ -46,14 +46,16 @@ body, html {
     align-items: flex-start; /* Alinear a la izquierda */
 }
 
+
+
 .control-button {
-    width: 10vw;
-    height: 10vw; /* Ajustar el alto para que sea cuadrado */
-    margin: 1vh 0;
+    width: 8vw;
+    height: 8vw; /* Ajustar el alto para que sea cuadrado */
+    margin: 4vh 0;
     font-size: 1vw;
     background-color: #ff7300;
     color: white;
-    border: ridge .5vw #ff7300; /* Quitar el borde sólido */
+    border: solid .2vw black; /* Quitar el borde sólido */
     border-radius: 0.5vw;
     cursor: pointer;
     display: flex;
@@ -63,10 +65,22 @@ body, html {
     box-shadow: 0.4vw 0.4vw 0.8vw rgba(0, 0, 0, 0.3), -0.2vw -0.2vw 0.4vw rgba(255, 255, 255, 0.2); /* Sombra para efecto 3D */
     transition: box-shadow 0.2s ease; /* Transición suave */
 }
+.sm{
+    width: 10vw;
+    height: 5vw;
+    margin: 10vh 0;
+    font-family: "Mochiy Pop P One", sans-serif;
+    font-weight: 400;
+    font-size: 2.5vw;
+    font-style: normal;
+    color: black;
+}
 
 .control-button:active {
     box-shadow: 0.2vw 0.2vw 0.4vw rgba(0, 0, 0, 0.3), -0.1vw -0.1vw 0.2vw rgba(255, 255, 255, 0.2); /* Sombra más pequeña al presionar */
     transform: translate(0.2vw, 0.2vw); /* Simular la presión del botón */
+    background-color: #c15f0e;
+
 }
 
 .control-button img {
@@ -75,7 +89,7 @@ body, html {
     object-fit: contain; /* Ajusta la imagen dentro del tamaño especificado manteniendo la proporción */
 }
 
-.canvas {
+.canvas-board {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -83,9 +97,19 @@ body, html {
     background-color: #fff;
     border-radius: 0.5vw;
     border: solid .1vw #91C5D0;
-    width: 960px;
-    height: 720px;
+    width: 50vw;
+    height: 75vh;
 }
+
+#mycanvas{
+    border: solid 5px black;
+}
+
+
+
+
+
+
 
 .boxed {
     opacity: 0.8;

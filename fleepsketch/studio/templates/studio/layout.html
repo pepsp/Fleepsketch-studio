@@ -7,9 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sketch!</title>
     <link rel="stylesheet" href="{% static 'studio/style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&display=swap" rel="stylesheet">
+
 </head>
 <body>
     <div class="app-container">
+
+
         <div class="canvas-container dotted">
 
             <div class="controls-container">
@@ -18,11 +24,23 @@
                 <button class="control-button"><img src="{% static 'studio/icons/eraser.svg' %}"/></button>
             </div>
 
-            <div class="canvas">
-               <canvas id="canvas"></canvas>
+            <div class="controls-container">
+                <button class="control-button sm"> EDIT </button>
+                <button class="control-button sm"> SAVE</button>
             </div>
+
+
+            <div class="canvas-board" id="board">
+                <canvas id="mycanvas"></canvas>
+                <script src="{% static 'studio/studio.js' %}"></script>
+            </div>
+
+
         </div>
     </div>
+
+
+    
 </body>
 </html>
 
