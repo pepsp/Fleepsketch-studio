@@ -1,6 +1,11 @@
 window.addEventListener('load', () => {
     const canvas = document.querySelector('#mycanvas');
+    const toolBtns = document.querySelectorAll('.tool-controls-container .control-button');
     const container = document.getElementById('board');
+
+    let currentTool = 'pencil';
+    let currentWidth = 2;
+
 
     const ctx = canvas.getContext('2d');
 
@@ -37,7 +42,7 @@ window.addEventListener('load', () => {
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
 
-        ctx.lineWidth = 5;
+        ctx.lineWidth = currentWidth;
         ctx.lineCap = 'round';
         // color = ctx.strokeStyle
 
@@ -48,6 +53,17 @@ window.addEventListener('load', () => {
     }
 
     // Event Listeners
+    toolBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Remover la clase 'active' de todos los botones de herramientas
+            toolBtns.forEach(b => b.classList.remove('active'));
+            // Agregar la clase 'active' al botón clicado
+            btn.classList.add('active');
+            currentTool = btn.id;
+            console.log(currentTool);
+        });
+    });
+
     canvas.addEventListener('mousedown', startPosition);
     canvas.addEventListener('mouseup', finishPosition);
     canvas.addEventListener('mousemove', draw);

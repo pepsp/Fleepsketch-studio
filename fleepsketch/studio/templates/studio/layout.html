@@ -10,37 +10,24 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&display=swap" rel="stylesheet">
-
 </head>
 <body>
     <div class="app-container">
-
-
         <div class="canvas-container dotted">
-
-            <div class="controls-container">
-                <button class="control-button"><img src="{% static 'studio/icons/pencil.svg' %}"/></button>
-                <button class="control-button"><img src="{% static 'studio/icons/brush.svg' %}"/></button>
-                <button class="control-button"><img src="{% static 'studio/icons/eraser.svg' %}"/></button>
+            <div class="tool-controls-container">
+                <button class="control-button active" id="pencil"><img src="{% static 'studio/icons/pencil.svg' %}" /></button>
+                <button class="control-button" id="brush"><img src="{% static 'studio/icons/brush.svg' %}" /></button>
+                <button class="control-button" id="eraser"><img src="{% static 'studio/icons/eraser.svg' %}" /></button>
             </div>
-
-            <div class="controls-container">
-                <button class="control-button sm"> EDIT </button>
-                <button class="control-button sm"> SAVE</button>
+            <div class="action-controls-container">
+                <button class="control-button sm" id="edit"> EDIT </button>
+                <button class="control-button sm" id="save"> SAVE</button>
             </div>
-
-
             <div class="canvas-board" id="board">
                 <canvas id="mycanvas"></canvas>
                 <script src="{% static 'studio/studio.js' %}"></script>
             </div>
-
-
         </div>
     </div>
-
-
-    
 </body>
 </html>
-
