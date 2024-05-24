@@ -15,8 +15,8 @@
     <div class="app-container">
         <div class="canvas-container dotted">
             <div class="tool-controls-container">
-                <button class="control-button active" id="pencil"><img src="{% static 'studio/icons/pencil.svg' %}" /></button>
-                <button class="control-button" id="brush"><img src="{% static 'studio/icons/brush.svg' %}" /></button>
+                <button class="control-button active" id="pencil" data-width="5"><img src="{% static 'studio/icons/pencil.svg' %}" /></button>
+                <button class="control-button" id="brush" data-width="20"><img src="{% static 'studio/icons/brush.svg' %}" /></button>
                 <button class="control-button" id="eraser"><img src="{% static 'studio/icons/eraser.svg' %}" /></button>
             </div>
             <div class="action-controls-container">
@@ -24,7 +24,8 @@
                 <button class="control-button sm" id="save"> SAVE</button>
             </div>
             <div class="canvas-board" id="board">
-                <canvas id="mycanvas"></canvas>
+                <canvas id="brushCanvas" style="position:absolute;"></canvas>
+                <canvas id="pencilCanvas" style="position:absolute;"></canvas>
                 <script src="{% static 'studio/studio.js' %}"></script>
             </div>
         </div>
