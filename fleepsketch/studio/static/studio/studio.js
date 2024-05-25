@@ -3,6 +3,7 @@ window.addEventListener('load', () => {
     const brushCanvas = document.querySelector('#brushCanvas');
     const toolBtns = document.querySelectorAll('.tool-controls-container .control-button');
     const container = document.getElementById('board');
+    const pencilBtns = document.getElementById('');
 
     let currentTool = 'pencil';
     let currentWidth = 5;

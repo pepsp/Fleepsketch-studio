@@ -1,4 +1,9 @@
 /* Estilos generales */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
 
 body, html {
     margin: 0;
@@ -49,7 +54,7 @@ body, html {
 .control-button {
     width: 8vw;
     height: 8vw; /* Ajustar el alto para que sea cuadrado */
-    margin: 4vh 0;
+    margin: 2vh 2.5vh; /* Reducir margen vertical */
     font-size: 1vw;
     background-color: #ff7300;
     color: white;
@@ -106,11 +111,56 @@ body, html {
     height: 75vh;
 }
 
-#mycanvas {
-    cursor: url('/static/studio/icons/circle.svg') 16 16, auto;
-
+.colors .option {
+    height: 2.3vw;
+    width: 2.3vw;
+    border-radius: 50%;
+    margin: 0 .2vw; /* Añadir margen horizontal para separación */
+    position: relative;
 }
 
+.colors .option:nth-child(1) {
+    background-color: #000000;
+    border: .3vw solid #fff;
+}
+.colors .option:nth-child(2) {
+    background-color: #ff0000;
+    border: .3vw solid #fff;
+}
+
+.colors .option:nth-child(3) {
+    background-color: #0000ff;
+    border: .3vw solid #fff;
+}
+
+.colors .options {
+    display: flex;
+    justify-content: center; /* Centrar las opciones horizontalmente */
+    align-items: center; /* Alinear opciones verticalmente */
+    gap: 0.5vw; /* Espacio entre las opciones */
+    margin-top: 1vh; /* Reducir margen superior para acercar a botón */
+}
+
+.colors .option:hover::before {
+    position: absolute;
+    content: "";
+    top: 50%;
+    left: 50%;
+    height: 2.3vw;
+    width: 2.3vw;
+    background: inherit;
+    border-radius: inherit;
+    border: solid .4vw #bfbfbf;
+    transform: translate(-50%, -50%);
+}
+
+.colors .option:first-child.selected::before {
+    border-color: #c15f0e;
+}
+
+canvas {
+    cursor: url('/static/studio/icons/circle.svg') 16 16, auto;
+}
 
 .boxed {
     opacity: 0.8;

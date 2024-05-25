@@ -16,7 +16,23 @@
         <div class="canvas-container dotted">
             <div class="tool-controls-container">
                 <button class="control-button active" id="pencil" data-width="5"><img src="{% static 'studio/icons/pencil.svg' %}" /></button>
+                
+                <div class="row colors">
+                    <ul class="options" id="colors">
+                        <li class="option" data-color="#000000"></li>
+                        <li class="option" data-color="ff0000"></li>
+                        <li class="option" data-color="#0000ff"></li>
+                    </ul>
+                </div>
+               
                 <button class="control-button" id="brush" data-width="20"><img src="{% static 'studio/icons/brush.svg' %}" /></button>
+                <div class="row colors">
+                    <ul class="options" id="colors">
+                        <li class="option" data-color="#000000"></li>
+                        <li class="option" data-color="ff0000"></li>
+                        <li class="option" data-color="#0000ff"></li>
+                    </ul>
+                </div>
                 <button class="control-button" id="eraser"><img src="{% static 'studio/icons/eraser.svg' %}" /></button>
             </div>
             <div class="action-controls-container">
@@ -30,5 +46,6 @@
             </div>
         </div>
     </div>
+    
 </body>
 </html>
