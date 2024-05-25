@@ -17,23 +17,23 @@
             <div class="tool-controls-container">
                 <button class="control-button active" id="pencil" data-width="5"><img src="{% static 'studio/icons/pencil.svg' %}" /></button>
                 
-                <div class="row colors">
-                    <ul class="options" id="colors">
-                        <li class="option" data-color="#000000"></li>
-                        <li class="option" data-color="ff0000"></li>
-                        <li class="option" data-color="#0000ff"></li>
+                <div class="row colors" id="pencil-colors-div">
+                    <ul class="options" id="pencil-colors">
+                        <li class="option selected" data-color="#000000" data-tool="pencil" id="pencil-default"></li>
+                        <li class="option" data-color="#ff0000" data-tool="pencil"></li>
+                        <li class="option" data-color="#0000ff" data-tool="pencil"></li>
                     </ul>
                 </div>
                
                 <button class="control-button" id="brush" data-width="20"><img src="{% static 'studio/icons/brush.svg' %}" /></button>
-                <div class="row colors">
-                    <ul class="options" id="colors">
-                        <li class="option" data-color="#000000"></li>
-                        <li class="option" data-color="ff0000"></li>
-                        <li class="option" data-color="#0000ff"></li>
+                <div class="row colors not-active" id="brush-colors-div">
+                    <ul class="options" id="brush-colors">
+                        <li class="option selected" data-color="#000000" data-tool="brush" id="brush-default"></li>
+                        <li class="option" data-color="#ff0000" data-tool="brush" ></li>
+                        <li class="option" data-color="#0000ff" data-tool="brush"></li>
                     </ul>
                 </div>
-                <button class="control-button" id="eraser"><img src="{% static 'studio/icons/eraser.svg' %}" /></button>
+                <button class="control-button" id="eraser" data-width="25"><img src="{% static 'studio/icons/eraser.svg' %}" /></button>
             </div>
             <div class="action-controls-container">
                 <button class="control-button sm" id="edit"> EDIT </button>
@@ -42,7 +42,7 @@
             <div class="canvas-board" id="board">
                 <canvas id="brushCanvas" style="position:absolute;"></canvas>
                 <canvas id="pencilCanvas" style="position:absolute;"></canvas>
-                <script src="{% static 'studio/studio.js' %}"></script>
+                <script type="module" src="{% static 'studio/studio.js' %}"></script>
             </div>
         </div>
     </div>

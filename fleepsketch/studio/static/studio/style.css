@@ -152,9 +152,10 @@ body, html {
     border-radius: inherit;
     border: solid .4vw #bfbfbf;
     transform: translate(-50%, -50%);
+    cursor: pointer;
 }
 
-.colors .option:first-child.selected::before {
+.colors .options .selected  {
     border-color: #c15f0e;
 }
 
@@ -186,4 +187,8 @@ canvas {
     background-image: radial-gradient(#858585 5%, transparent 5%);
     background-size: 5vh 5vh; /* Tamaño de los puntos */
     background-repeat: repeat;
+}
+
+.not-active{
+    display: none;    
 }
