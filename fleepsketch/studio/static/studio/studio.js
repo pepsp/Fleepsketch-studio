@@ -1,8 +1,10 @@
 import { getPattern } from './patterns.js';
+import { setCustomCursor } from './patterns.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const pencilCanvas = document.querySelector('#pencilCanvas');
     const brushCanvas = document.querySelector('#brushCanvas');
+    const canvases = document.querySelectorAll('canvas');
     const toolBtns = document.querySelectorAll('.tool-controls-container .control-button');
     const container = document.getElementById('board');
     const colorTool = document.querySelectorAll('.colors .option');
@@ -10,15 +12,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const brushColorTool = document.getElementById('brush-colors-div')
     const pencilDefault = document.getElementById('pencil-default');
     const brushDefault = document.getElementById('brush-default');
+    const clearBtn = document.getElementById('clear');
 
     let pencilColor = "#000000";
     let brushColor = "#000000";
 
     let currentTool = 'pencil';
     let currentWidth = 5;
+    
+    canvases.forEach(canvas => {
+        setCustomCursor(canvas, currentWidth);
+    });
 
     const pencilCtx = pencilCanvas.getContext('2d');
-    const brushCtx = brushCanvas.getContext('2d');
+    const brushCtx = brushCanvas.getContext('2d');    
 
     // Resizing
     function resizeCanvas() {
@@ -83,6 +90,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const ctx = currentTool === 'brush' ? brushCtx : pencilCtx;
 
             ctx.lineWidth = currentWidth;
+            canvases.forEach(canvas => {
+                setCustomCursor(canvas, currentWidth);
+            });
+        
             ctx.lineCap = 'round';
 
             if (currentTool === 'brush') {
@@ -104,6 +115,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Event Listeners
+
+    clearBtn.addEventListener('click', () => {
+        pencilCtx.clearRect(0, 0, pencilCanvas.width, pencilCanvas.height);
+        brushCtx.clearRect(0,0, brushCanvas.width, brushCanvas.height);
+    })
+
     toolBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             // Remover la clase 'active' de todos los botones de herramientas
@@ -128,6 +145,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             currentTool = btn.id;
             currentWidth = btn.dataset.width;
+            canvases.forEach(canvas => {
+                setCustomCursor(canvas, currentWidth);
+            });
+        
             console.log(currentTool);
         });
     });

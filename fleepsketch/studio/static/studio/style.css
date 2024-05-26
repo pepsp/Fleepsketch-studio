@@ -52,8 +52,8 @@ body, html {
 }
 
 .control-button {
-    width: 8vw;
-    height: 8vw; /* Ajustar el alto para que sea cuadrado */
+    width: 6vw;
+    height: 6vw; /* Ajustar el alto para que sea cuadrado */
     margin: 2vh 2.5vh; /* Reducir margen vertical */
     font-size: 1vw;
     background-color: #ff7300;
@@ -70,12 +70,12 @@ body, html {
 }
 
 .sm {
-    width: 10vw;
+    width: 8vw;
     height: 5vw;
     margin: 10vh 0;
     font-family: "Mochiy Pop P One", sans-serif;
     font-weight: 400;
-    font-size: 2.5vw;
+    font-size: 1.5vw;
     font-style: normal;
     color: black;
 }
@@ -112,8 +112,8 @@ body, html {
 }
 
 .colors .option {
-    height: 2.3vw;
-    width: 2.3vw;
+    height: 1.3vw;
+    width: 1.3vw;
     border-radius: 50%;
     margin: 0 .2vw; /* Añadir margen horizontal para separación */
     position: relative;
@@ -121,24 +121,25 @@ body, html {
 
 .colors .option:nth-child(1) {
     background-color: #000000;
-    border: .3vw solid #fff;
+    border: .2vw solid #fff;
 }
 .colors .option:nth-child(2) {
     background-color: #ff0000;
-    border: .3vw solid #fff;
+    border: .2vw solid #fff;
 }
 
 .colors .option:nth-child(3) {
     background-color: #0000ff;
-    border: .3vw solid #fff;
+    border: .2vw solid #fff;
 }
 
 .colors .options {
     display: flex;
     justify-content: center; /* Centrar las opciones horizontalmente */
     align-items: center; /* Alinear opciones verticalmente */
-    gap: 0.5vw; /* Espacio entre las opciones */
-    margin-top: 1vh; /* Reducir margen superior para acercar a botón */
+    gap: 0.2vw; /* Espacio entre las opciones */
+    margin-top: .1vh; /* Reducir margen superior para acercar a botón */
+    margin-left: 1.2vw;
 }
 
 .colors .option:hover::before {
@@ -146,22 +147,19 @@ body, html {
     content: "";
     top: 50%;
     left: 50%;
-    height: 2.3vw;
-    width: 2.3vw;
+    height: 1.3vw;
+    width: 1.3vw;
     background: inherit;
     border-radius: inherit;
-    border: solid .4vw #bfbfbf;
+    border: solid .2vw #bfbfbf;
     transform: translate(-50%, -50%);
     cursor: pointer;
 }
 
 .colors .options .selected  {
-    border-color: #c15f0e;
+    border-color: #e76102;
 }
 
-canvas {
-    cursor: url('/static/studio/icons/circle.svg') 16 16, auto;
-}
 
 .boxed {
     opacity: 0.8;
@@ -192,3 +190,4 @@ canvas {
 .not-active{
     display: none;    
 }
+
