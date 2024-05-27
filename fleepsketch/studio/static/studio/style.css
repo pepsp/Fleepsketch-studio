@@ -88,8 +88,6 @@ body, html {
 
 .control-button.active {
     background-color: #8fbec8; /* Color diferente para el botón activo */
-    box-shadow: inset 0.2vw 0.2vw 0.4vw rgba(0, 0, 0, 0.3), inset -0.1vw -0.1vw 0.2vw rgba(255, 255, 255, 0.2); /* Sombra interna para el efecto de presión */
-    transform: translate(0.2vw, 0.2vw); /* Simular la presión del botón */
     border: ridge #c15f0e .4vw
 }
 
@@ -121,23 +119,23 @@ body, html {
 
 .colors .option:nth-child(1) {
     background-color: #000000;
-    border: .2vw solid #fff;
+    border: .23vw solid #fff;
 }
 .colors .option:nth-child(2) {
     background-color: #ff0000;
-    border: .2vw solid #fff;
+    border: .23vw solid #fff;
 }
 
 .colors .option:nth-child(3) {
     background-color: #0000ff;
-    border: .2vw solid #fff;
+    border: .23vw solid #fff;
 }
 
 .colors .options {
     display: flex;
     justify-content: center; /* Centrar las opciones horizontalmente */
     align-items: center; /* Alinear opciones verticalmente */
-    gap: 0.2vw; /* Espacio entre las opciones */
+    gap: 0.3vw; /* Espacio entre las opciones */
     margin-top: .1vh; /* Reducir margen superior para acercar a botón */
     margin-left: 1.2vw;
 }
@@ -151,13 +149,13 @@ body, html {
     width: 1.3vw;
     background: inherit;
     border-radius: inherit;
-    border: solid .2vw #bfbfbf;
+    border: solid .35vw #bfbfbf;
     transform: translate(-50%, -50%);
     cursor: pointer;
 }
 
 .colors .options .selected  {
-    border-color: #e76102;
+    border: solid .3vw #e65314;
 }
 
 
@@ -191,3 +189,34 @@ body, html {
     display: none;    
 }
 
+.sizes li{
+    margin: .3vw 0 0;
+    padding: .3vw;
+    background-color: #ff7300;
+    color: black;
+    font-family:"Mochiy Pop P One", sans-serif;
+    border-radius: 10%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.sizes li:hover{
+    background-color: #e65314;
+}
+
+.sizes .current-brush{
+    background-color: #8fbec8;
+}
+
+.sizes-container{
+    display: flex;
+}
+
+.controls-wrapper {
+    display: flex;
+    align-items: center; /* Opcional: Alinea verticalmente los elementos */
+}
+
+.control-button {
+    margin-right: 1rem; /* Espacio entre el botón y el contenedor de tamaños */
+}

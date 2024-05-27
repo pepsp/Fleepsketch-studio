@@ -15,7 +15,7 @@ export function createSquarePattern(ctx, baseColor, squareSize = 2) {
 
 
 export function setCustomCursor(element, pointRadius) {
-    const diameter = 32; // Diámetro constante del círculo grande
+    const diameter = 60; // Diámetro constante del círculo grande
 
     // Crear el SVG
     const svg = `
