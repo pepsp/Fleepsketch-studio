@@ -72,9 +72,8 @@ body, html {
 .sm {
     width: 8vw;
     height: 5vw;
-    margin: 10vh 0;
+    margin: 10vh 0vw;
     font-family: "Mochiy Pop P One", sans-serif;
-    font-weight: 400;
     font-size: 1.5vw;
     font-style: normal;
     color: black;
@@ -85,6 +84,13 @@ body, html {
     transform: translate(0.2vw, 0.2vw); /* Simular la presión del botón */
     background-color: #c15f0e;
 }
+
+.size:active {
+    box-shadow: 0.2vw 0.2vw 0.4vw rgba(0, 0, 0, 0.3), -0.1vw -0.1vw 0.2vw rgba(255, 255, 255, 0.2); /* Sombra más pequeña al presionar */
+    transform: translate(0.2vw, 0.2vw); /* Simular la presión del botón */
+    background-color: #c15f0e;
+}
+
 
 .control-button.active {
     background-color: #8fbec8; /* Color diferente para el botón activo */
@@ -181,7 +187,7 @@ body, html {
 .dotted {
     opacity: 1;
     background-image: radial-gradient(#858585 5%, transparent 5%);
-    background-size: 5vh 5vh; /* Tamaño de los puntos */
+    background-size: 1vh 1vh; /* Tamaño de los puntos */
     background-repeat: repeat;
 }
 
@@ -190,19 +196,15 @@ body, html {
 }
 
 .sizes li{
-    margin: .3vw 0 0;
+    margin: .3vw;
     padding: .3vw;
     background-color: #ff7300;
     color: black;
     font-family:"Mochiy Pop P One", sans-serif;
     border-radius: 10%;
     cursor: pointer;
-    transition: background-color 0.3s;
 }
 
-.sizes li:hover{
-    background-color: #e65314;
-}
 
 .sizes .current-brush{
     background-color: #8fbec8;
@@ -219,4 +221,39 @@ body, html {
 
 .control-button {
     margin-right: 1rem; /* Espacio entre el botón y el contenedor de tamaños */
+}
+
+#pattern-trigger{
+    width: 1vw;
+    height: 1vw;
+    border: .15vw solid black;
+    border-radius: 20%;
+    position: absolute;
+    bottom: -2.8vw;
+    right: -5vw;
+    background-image: repeating-conic-gradient(#000000 0% 25%, #E4E4ED 0% 50%);
+    background-position: 0 0, 0.4vw 0.4vw;
+    background-size: .5vw .5vw;
+    background-color: #E4E4ED;	
+}
+.trigger-container {
+    position: relative;
+}
+
+.pattern{
+    background: white;
+    border: .15vw solid #fff;
+}
+
+.patterns .pattern {
+    height: 1.3vw;
+    width: 1.3vw;
+    border-radius: 50%;
+}
+
+
+.patterns{
+    column-count: 2;
+    column-gap: .2vw;
+    margin-left: .2vw;
 }

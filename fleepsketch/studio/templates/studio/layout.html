@@ -18,13 +18,14 @@
             <div class="tool-controls-container">
                 
                 <div class="controls-wrapper">
-                    <div class="control-button active" id="pencil" data-width="1"><img src="{% static 'studio/icons/pencil.svg' %}" /></div>
+                    <div class="control-button active" id="pencil" data-width="1"><img src="{% static 'studio/icons/pencil.svg' %}" />                        
+                    </div>
                     <div class="sizes-container">
 
                         <ul class="sizes" id="pencil-sizes">
                             <li data-size="1" class="current-brush size" id="pencil-size-default">small</li>
-                            <li data-size="3" class="size">medium</li>
-                            <li data-size="5" class="size">large</li>
+                            <li data-size="5" class="size">medium</li>
+                            <li data-size="10" class="size">large</li>
                         </ul>
                     </div>
                 </div>
@@ -39,7 +40,13 @@
 
 
                <div class="controls-wrapper">
-                <div class="control-button" id="brush" data-width="20"><img src="{% static 'studio/icons/brush.svg' %}" /></div>
+                <div class="control-button" id="brush" data-width="20">
+
+                    <div class="trigger-container not-active">
+                        <div id="pattern-trigger"></div>
+                    </div>
+                    <img src="{% static 'studio/icons/brush.svg' %}" />
+                </div>
 
                 <div class="sizes-container">
                     <ul class="sizes not-active" id="brush-sizes">
@@ -49,6 +56,13 @@
                     </ul>
                 </div>
 
+                <div class="patterns-container">
+                    <ul class="patterns not-active" id="brush-patterns">
+                        
+                    </ul>
+                </div>
+
+
                </div>
                
                 <div class="row colors not-active" id="brush-colors-div">
@@ -56,6 +70,8 @@
                         <li class="option selected" data-color="#000000" data-tool="brush" id="brush-default"></li>
                         <li class="option" data-color="#ff0000" data-tool="brush" ></li>
                         <li class="option" data-color="#0000ff" data-tool="brush"></li>
+                        <li class="option pattern" data-tool="brush"></li>
+
                     </ul>
                 </div>
 

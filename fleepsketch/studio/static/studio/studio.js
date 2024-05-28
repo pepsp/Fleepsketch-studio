@@ -1,30 +1,32 @@
-import { getPattern } from './patterns.js';
-import { setCustomCursor } from './patterns.js';
+import { availablePatterns, getPattern, setCustomCursor, generatePatternList } from './patterns.js';
 
 document.addEventListener('DOMContentLoaded', () => {
+    generatePatternList(availablePatterns);
+
     const pencilCanvas = document.querySelector('#pencilCanvas');
     const brushCanvas = document.querySelector('#brushCanvas');
     const canvases = document.querySelectorAll('canvas');
     const toolBtns = document.querySelectorAll('.tool-controls-container .control-button');
-    const sizeSelector = document.querySelectorAll('.sizes-container .size')
+    const sizeSelector = document.querySelectorAll('.sizes-container .size');
     const container = document.getElementById('board');
     const colorTool = document.querySelectorAll('.colors .option');
     const pencilColorTool = document.getElementById('pencil-colors-div');
-    const brushColorTool = document.getElementById('brush-colors-div')
+    const brushColorTool = document.getElementById('brush-colors-div');
     const pencilDefault = document.getElementById('pencil-default');
     const brushDefault = document.getElementById('brush-default');
     const clearBtn = document.getElementById('clear');
     const pencilSizeDefault = document.getElementById('pencil-size-default');
     const brushSizeDefault = document.getElementById('brush-size-default');
-
     const pencilSizes = document.getElementById('pencil-sizes');
     const brushSizes = document.getElementById('brush-sizes');
+    const patternTrigger = document.querySelector('.trigger-container');
+    const brushPatterns = document.getElementById('brush-patterns');
 
     let pencilColor = "#000000";
     let brushColor = "#000000";
     let currentTool = 'pencil';
     let currentWidth = 1;
-    
+
     canvases.forEach(canvas => {
         setCustomCursor(canvas, currentWidth);
     });
@@ -32,7 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const pencilCtx = pencilCanvas.getContext('2d');
     const brushCtx = brushCanvas.getContext('2d');    
 
-    // Resizing
     function resizeCanvas() {
         pencilCanvas.height = container.clientHeight;
         pencilCanvas.width = container.clientWidth;
@@ -43,19 +44,18 @@ document.addEventListener('DOMContentLoaded', () => {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Variables
     let isDrawing = false;
 
     function startPosition(e) {
         isDrawing = true;
-        draw(e); // Iniciar el trazo inmediatamente al hacer clic
+        draw(e);
     }
 
     function finishPosition(e) {
         if (isDrawing) {
-            draw(e); // Asegurarse de dibujar el último punto
+            draw(e);
             isDrawing = false;
-            pencilCtx.beginPath(); // Reiniciar el camino del trazo
+            pencilCtx.beginPath();
             brushCtx.beginPath();
         }
     }
@@ -63,7 +63,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function draw(e) {
         if (!isDrawing) return;
 
-        // Calcular la posición del mouse relativa al canvas
         const rect = pencilCanvas.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
@@ -98,13 +97,13 @@ document.addEventListener('DOMContentLoaded', () => {
             canvases.forEach(canvas => {
                 setCustomCursor(canvas, currentWidth);
             });
-        
+
             ctx.lineCap = 'round';
 
             if (currentTool === 'brush') {
-                ctx.strokeStyle = getPattern(ctx, 'square', brushColor); // Usar el patrón aquí
+                ctx.strokeStyle = getPattern(ctx, 'square', brushColor);
             } else {
-                ctx.strokeStyle = pencilColor; // Color sólido para el lápiz
+                ctx.strokeStyle = pencilColor;
             }
 
             ctx.lineTo(x, y);
@@ -119,24 +118,20 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.fillStyle = pattern;
     }
 
-    // Event Listeners
-
     clearBtn.addEventListener('click', () => {
         pencilCtx.clearRect(0, 0, pencilCanvas.width, pencilCanvas.height);
-        brushCtx.clearRect(0,0, brushCanvas.width, brushCanvas.height);
-    })
+        brushCtx.clearRect(0, 0, brushCanvas.width, brushCanvas.height);
+    });
 
     toolBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            // Remover la clase 'active' de todos los botones de herramientas
             toolBtns.forEach(b => b.classList.remove('active'));
-            // Agregar la clase 'active' al botón clicado
             btn.classList.add('active');
-            
-            if(btn.id == 'pencil'){
-                //reset default size
+
+            if (btn.id == 'pencil') {
                 sizeSelector.forEach(b => b.classList.remove('current-brush'));
-                pencilSizeDefault.classList.add('current-brush')
+                pencilSizeDefault.classList.add('current-brush');
+                patternTrigger.classList.add('not-active');
 
                 pencilColorTool.classList.remove('not-active');
                 pencilSizes.classList.remove('not-active');
@@ -144,48 +139,40 @@ document.addEventListener('DOMContentLoaded', () => {
                 brushSizes.classList.add('not-active');
                 brushColorTool.classList.add('not-active');
                 colorTool.forEach(b => b.classList.remove('selected'));
-                pencilDefault.classList.add('selected')
-                pencilColor='#000000';
-            }else if(btn.id == 'brush'){
-                //mostrar colores y tamanos de brush 
+                pencilDefault.classList.add('selected');
+                pencilColor = '#000000';
+            } else if (btn.id == 'brush') {
                 brushColorTool.classList.remove('not-active');
                 brushSizes.classList.remove('not-active');
+                patternTrigger.classList.remove('not-active');
 
-
-                //ocultar colores y tamanos de pencil
                 pencilColorTool.classList.add('not-active');
-                pencilSizes.classList.add('not-active')
+                pencilSizes.classList.add('not-active');
 
-                // reset default size
                 sizeSelector.forEach(b => b.classList.remove('current-brush'));
-                brushSizeDefault.classList.add('current-brush')
+                brushSizeDefault.classList.add('current-brush');
 
-
-                //reset color seleccionado (display)
                 colorTool.forEach(b => b.classList.remove('selected'));
                 brushDefault.classList.add('selected');
-                brushColor='#000000';
-            }else if(btn.id == 'eraser'){
-                //ocultar colores y tama;os de pencil y brush
+                brushColor = '#000000';
+            } else if (btn.id == 'eraser') {
                 pencilColorTool.classList.add('not-active');
+                patternTrigger.classList.add('not-active');
                 brushColorTool.classList.add('not-active');
                 pencilSizes.classList.add('not-active');
                 brushSizes.classList.add('not-active');
-                //restaurar colores default (solo display)
                 colorTool.forEach(b => b.classList.remove('selected'));
                 pencilSizeDefault.classList.add('current-brush');
-                brushSizeDefault.classList.add('current-brush')
-                pencilDefault.classList.add('selected')
+                brushSizeDefault.classList.add('current-brush');
+                pencilDefault.classList.add('selected');
                 brushDefault.classList.add('selected');
-
             }
+
             currentTool = btn.id;
             currentWidth = btn.dataset.width;
             canvases.forEach(canvas => {
                 setCustomCursor(canvas, currentWidth);
             });
-        
-            console.log(currentTool);
         });
     });
 
@@ -194,26 +181,28 @@ document.addEventListener('DOMContentLoaded', () => {
             colorTool.forEach(b => b.classList.remove('selected'));
             if (btn.dataset.tool === 'pencil') {
                 pencilColor = btn.dataset.color;
-                
             } else if (btn.dataset.tool === 'brush') {
                 brushColor = btn.dataset.color;
                 applyPattern(brushCtx, 'square', brushColor);
             }
-            btn.classList.add('selected')
+            btn.classList.add('selected');
         });
     });
 
-    sizeSelector.forEach( btn =>{
-        btn.addEventListener('click', () =>{
+    sizeSelector.forEach(btn => {
+        btn.addEventListener('click', () => {
             sizeSelector.forEach(b => b.classList.remove('current-brush'));
-            currentWidth = btn.dataset.size
+            currentWidth = btn.dataset.size;
             canvases.forEach(canvas => {
                 setCustomCursor(canvas, currentWidth);
             });
-            btn.classList.add('current-brush')
+            btn.classList.add('current-brush');
+        });
+    });
 
-        })
-    })
+    patternTrigger.addEventListener('click', () => {
+        brushPatterns.classList.toggle('not-active');
+    });
 
     pencilCanvas.addEventListener('mousedown', startPosition);
     pencilCanvas.addEventListener('mouseup', finishPosition);
