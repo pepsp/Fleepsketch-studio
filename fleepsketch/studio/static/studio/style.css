@@ -245,6 +245,11 @@ body, html {
     border: .15vw solid #fff;
 }
 
+.pattern:hover{
+    cursor: pointer;
+    border: .15vw solid black;
+}
+
 .patterns .pattern {
     height: 1.3vw;
     width: 1.3vw;
@@ -253,7 +258,8 @@ body, html {
 
 
 .patterns{
-    column-count: 2;
-    column-gap: .2vw;
     margin-left: .2vw;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas con igual ancho */
 }
+

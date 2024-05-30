@@ -100,13 +100,48 @@ export function createVerticalLinesPattern(ctx, baseColor) {
     patternCanvas.height = 10;
     const patternCtx = patternCanvas.getContext('2d');
 
-    patternCtx.fillStyle = '#fff';
+    patternCtx.fillStyle = 'transparent';
     patternCtx.fillRect(0, 0, 10, 10);
     patternCtx.fillStyle = baseColor;
     patternCtx.fillRect(2, 0, 2, 10);
 
     return ctx.createPattern(patternCanvas, 'repeat');
 }
+
+function createHorizontalLinesPattern(ctx, baseColor) {
+    const patternCanvas = document.createElement('canvas');
+    patternCanvas.width = 10;
+    patternCanvas.height = 10;
+    const patternCtx = patternCanvas.getContext('2d');
+
+    patternCtx.fillStyle = 'transparent';
+    patternCtx.fillRect(0, 0, 10, 10);
+    patternCtx.fillStyle = baseColor; 
+    patternCtx.fillRect(0, 2, 10, 2);
+
+    return ctx.createPattern(patternCanvas, 'repeat');
+}
+
+function createTrianglesPattern(ctx, baseColor) {
+    const patternCanvas = document.createElement('canvas');
+    patternCanvas.width = 10;
+    patternCanvas.height = 10;
+    const patternCtx = patternCanvas.getContext('2d');
+
+    patternCtx.fillStyle = '#fff';
+    patternCtx.fillRect(0, 0, 10, 10);
+    patternCtx.fillStyle = baseColor;
+    patternCtx.beginPath();
+    patternCtx.moveTo(0, 10);
+    patternCtx.lineTo(5, 0);
+    patternCtx.lineTo(10, 10);
+    patternCtx.closePath();
+    patternCtx.fill();
+
+    return ctx.createPattern(patternCanvas, 'repeat');
+}
+
+
 
 
 export function setCustomCursor(element, pointRadius) {
@@ -125,11 +160,14 @@ export function setCustomCursor(element, pointRadius) {
 
 export const availablePatterns = {
     'square': createSquarePattern,
-    'heart': createHeartsPattern,
-    'vertical': createVerticalLinesPattern,
     'square-sm': createSquareSmallPattern,
     'dots': createDotsPattern,
-    'stars': createStarsPattern
+    'vertical': createVerticalLinesPattern,
+    'horizontal': createHorizontalLinesPattern,
+    'triangles': createTrianglesPattern,
+    'stars': createStarsPattern,
+    'heart': createHeartsPattern
+
 };
 
 export function getPattern(ctx, patternName, baseColor) {
@@ -160,7 +198,6 @@ export function generatePatternList(patterns) {
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         li.style.background = `url(${canvas.toDataURL()})`;
-
         ul.appendChild(li);
     });
 }

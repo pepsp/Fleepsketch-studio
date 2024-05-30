@@ -47,8 +47,17 @@
                     </div>
                     <img src="{% static 'studio/icons/brush.svg' %}" />
                 </div>
-
-                <div class="sizes-container">
+                
+                <div id="hidden">
+                    <div class="sizes-container" id="sizes-container-brush">
+                        <ul class="sizes not-active" id="brush-sizes">
+                            <li data-size="20" class="current-brush size" id="brush-size-default">small</li>
+                            <li data-size="30" class="size">medium</li>
+                            <li data-size="45" class="size">large</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="sizes-container" id="sizes-container-brush">
                     <ul class="sizes not-active" id="brush-sizes">
                         <li data-size="20" class="current-brush size" id="brush-size-default">small</li>
                         <li data-size="30" class="size">medium</li>
@@ -56,9 +65,8 @@
                     </ul>
                 </div>
 
-                <div class="patterns-container">
-                    <ul class="patterns not-active" id="brush-patterns">
-                        
+                <div class="patterns-container not-active" id="patterns-container">
+                    <ul class="patterns" id="brush-patterns">
                     </ul>
                 </div>
 

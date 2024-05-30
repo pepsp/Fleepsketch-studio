@@ -19,9 +19,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const brushSizeDefault = document.getElementById('brush-size-default');
     const pencilSizes = document.getElementById('pencil-sizes');
     const brushSizes = document.getElementById('brush-sizes');
+    const hide = document.querySelector('#hidden');
     const patternTrigger = document.querySelector('.trigger-container');
-    const brushPatterns = document.getElementById('brush-patterns');
+    const divPatterns = document.getElementById('patterns-container');
+    let patterns;
+    console.log(patterns)
 
+    let currentPattern = 'square-sm';
     let pencilColor = "#000000";
     let brushColor = "#000000";
     let currentTool = 'pencil';
@@ -101,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.lineCap = 'round';
 
             if (currentTool === 'brush') {
-                ctx.strokeStyle = getPattern(ctx, 'square', brushColor);
+                ctx.strokeStyle = getPattern(ctx, currentPattern, brushColor);
             } else {
                 ctx.strokeStyle = pencilColor;
             }
@@ -118,6 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.fillStyle = pattern;
     }
 
+
     clearBtn.addEventListener('click', () => {
         pencilCtx.clearRect(0, 0, pencilCanvas.width, pencilCanvas.height);
         brushCtx.clearRect(0, 0, brushCanvas.width, brushCanvas.height);
@@ -132,9 +137,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 sizeSelector.forEach(b => b.classList.remove('current-brush'));
                 pencilSizeDefault.classList.add('current-brush');
                 patternTrigger.classList.add('not-active');
+                                divPatterns.classList.add('not-active');
+
 
                 pencilColorTool.classList.remove('not-active');
                 pencilSizes.classList.remove('not-active');
+                hide.classList.remove('not-active');
+
 
                 brushSizes.classList.add('not-active');
                 brushColorTool.classList.add('not-active');
@@ -144,6 +153,8 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (btn.id == 'brush') {
                 brushColorTool.classList.remove('not-active');
                 brushSizes.classList.remove('not-active');
+
+                //patern trigger
                 patternTrigger.classList.remove('not-active');
 
                 pencilColorTool.classList.add('not-active');
@@ -155,7 +166,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 colorTool.forEach(b => b.classList.remove('selected'));
                 brushDefault.classList.add('selected');
                 brushColor = '#000000';
+                hide.classList.remove('not-active');
             } else if (btn.id == 'eraser') {
+                divPatterns.classList.add('not-active');
                 pencilColorTool.classList.add('not-active');
                 patternTrigger.classList.add('not-active');
                 brushColorTool.classList.add('not-active');
@@ -166,6 +179,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 brushSizeDefault.classList.add('current-brush');
                 pencilDefault.classList.add('selected');
                 brushDefault.classList.add('selected');
+                hide.classList.remove('not-active');
+
             }
 
             currentTool = btn.id;
@@ -183,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 pencilColor = btn.dataset.color;
             } else if (btn.dataset.tool === 'brush') {
                 brushColor = btn.dataset.color;
-                applyPattern(brushCtx, 'square', brushColor);
+                applyPattern(brushCtx, currentPattern, brushColor);
             }
             btn.classList.add('selected');
         });
@@ -201,7 +216,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     patternTrigger.addEventListener('click', () => {
-        brushPatterns.classList.toggle('not-active');
+        divPatterns.classList.toggle('not-active');
+        
+        hide.classList.add('not-active')
+        patterns = document.querySelectorAll('#brush-patterns li');
+        patterns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentPattern = btn.dataset.pattern;
+                applyPattern(brushCtx, currentPattern, brushColor);
+                divPatterns.classList.add('not-active');
+                hide.classList.remove('not-active');
+
+            });
+        });
     });
 
     pencilCanvas.addEventListener('mousedown', startPosition);
