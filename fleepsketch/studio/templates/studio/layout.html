@@ -94,13 +94,43 @@
                 <button class="control-button sm" id="save">SAVE</button>
             </div>
 
+
+
+    <div class="container">
+
+        <div  class="frame-icon">
+            <img src="{% static 'studio/icons/left.svg' %}">
+         </div>
+
+        <div class="canvas-control">
         <div class="canvas-board" id="board">
                 <canvas id="brushCanvas" style="position:absolute;"></canvas>
                 <canvas id="pencilCanvas" style="position:absolute;"></canvas>
+
                 <script type="module" src="{% static 'studio/studio.js' %}"></script>
-             </div>
         </div>
-    </div>
+
+        <div class="control-bar">
+
+            <div class="play-container">
+                <img src="{% static 'studio/icons/right.svg' %}"></img>
+            </div>
     
+        </div>
+        </div>
+
+        <div  class="frame-icon">
+            <img src="{% static 'studio/icons/right.svg' %}">
+        </div>
+
+        </div>
+
+
+
+
+    </div>
+
+    
+</div>
 </body>
 </html>

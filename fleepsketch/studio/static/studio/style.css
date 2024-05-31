@@ -107,7 +107,6 @@ body, html {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 2vw;
     background-color: #fff;
     border-radius: 0.5vw;
     border: solid .1vw #91C5D0;
@@ -146,50 +145,15 @@ body, html {
     margin-left: 1.2vw;
 }
 
-.colors .option:hover::before {
-    position: absolute;
-    content: "";
-    top: 50%;
-    left: 50%;
-    height: 1.3vw;
-    width: 1.3vw;
-    background: inherit;
-    border-radius: inherit;
-    border: solid .35vw #bfbfbf;
-    transform: translate(-50%, -50%);
+.colors .option:hover{
     cursor: pointer;
+    border: .3vw rgb(214, 210, 210) solid;
 }
 
 .colors .options .selected  {
     border: solid .3vw #e65314;
 }
 
-
-.boxed {
-    opacity: 0.8;
-    background-image: linear-gradient(#737373 1px, transparent 1px), 
-                      linear-gradient(to right, #737373 1px, #fff 1px);
-    background-size: 20px 20px;
-}
-
-.lines-horizontal {
-    opacity: 0.8;
-    background-size: 20px 20px;
-    background-image: repeating-linear-gradient(0deg, #737373, #737373 1px, #fff 1px, #fff);
-}
-
-.lines-vertical {
-    opacity: 0.8;
-    background-size: 20px 20px;
-    background-image: repeating-linear-gradient(to right, #737373, #737373 1px, #fff 1px, #fff);
-}
-
-.dotted {
-    opacity: 1;
-    background-image: radial-gradient(#858585 5%, transparent 5%);
-    background-size: 1vh 1vh; /* Tamaño de los puntos */
-    background-repeat: repeat;
-}
 
 .not-active{
     display: none;    
@@ -220,7 +184,7 @@ body, html {
 }
 
 .control-button {
-    margin-right: 1rem; /* Espacio entre el botón y el contenedor de tamaños */
+    margin-right: 1vw; /* Espacio entre el botón y el contenedor de tamaños */
 }
 
 #pattern-trigger{
@@ -263,3 +227,52 @@ body, html {
     grid-template-columns: repeat(2, 1fr); /* Dos columnas con igual ancho */
 }
 
+.frame-icon{
+    width: 3vw;
+    height: 3vw; /* Ajustar el alto para que sea cuadrado */
+}
+
+.frame-icon img {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    object-fit: contain;
+}
+
+
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.control-bar {
+    display: flex;
+    justify-content: center;
+    }
+
+.play-container{
+    width: 5.5vw;
+    height: 5.5vw;
+    border: solid 1px black;
+    border-radius: 25%;
+    background-color: #ff7300;
+    margin-bottom: -4.2vw;
+    margin-top: .8vw;
+}
+
+.play-container img{
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    object-fit: contain;
+}
+
+.canvas-control{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    width: 100%;
+}

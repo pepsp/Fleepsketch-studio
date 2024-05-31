@@ -166,7 +166,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 colorTool.forEach(b => b.classList.remove('selected'));
                 brushDefault.classList.add('selected');
                 brushColor = '#000000';
-                hide.classList.remove('not-active');
             } else if (btn.id == 'eraser') {
                 divPatterns.classList.add('not-active');
                 pencilColorTool.classList.add('not-active');
