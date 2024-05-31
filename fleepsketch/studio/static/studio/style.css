@@ -169,6 +169,10 @@ body, html {
     cursor: pointer;
 }
 
+.size{
+    font-size: 1vw;
+}
+
 
 .sizes .current-brush{
     background-color: #8fbec8;
