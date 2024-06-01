@@ -92,28 +92,47 @@
 
     <div class="container">
 
-        <div  class="frame-icon">
+        <div  class="frame-icon" id="prev-frame">
             <img src="{% static 'studio/icons/left.svg' %}">
          </div>
 
         <div class="canvas-control">
-        <div class="canvas-board" id="board">
+
+            <div class="frame-counter-container">
+
+                <div class="frame-counter">
+                    <p id="frame-display"></p>
+                </div>
+
+            </div>
+            
+            <div class="canvas-board" id="board">
                 <canvas id="brushCanvas" style="position:absolute;"></canvas>
                 <canvas id="pencilCanvas" style="position:absolute;"></canvas>
-
+                <img id="onion-skin" style="position:absolute; opacity:0.1; pointer-events:none;">
                 <script type="module" src="{% static 'studio/studio.js' %}"></script>
         </div>
 
         <div class="control-bar">
 
-            <div class="play-container">
+            <div class="loop-container" id="loop">
+                <div class="loop"></div>
+                </div>
+
+            <div class="play-container" id="play">
                 <img src="{% static 'studio/icons/right.svg' %}"></img>
             </div>
+
+
+            <div class="speed-container" id="speed">
+                <div class="speed"></div>
+            </div>
+
     
         </div>
         </div>
 
-        <div  class="frame-icon">
+        <div  class="frame-icon" id="next-frame">
             <img src="{% static 'studio/icons/right.svg' %}">
         </div>
 
@@ -123,6 +142,9 @@
 
 
     </div>
+
+
+    <script src="{% static 'studio/animation.js' %}"></script>
 
     
 </div>

@@ -31,6 +31,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentTool = 'pencil';
     let currentWidth = 1;
 
+
+    
+
     canvases.forEach(canvas => {
         setCustomCursor(canvas, currentWidth);
     });

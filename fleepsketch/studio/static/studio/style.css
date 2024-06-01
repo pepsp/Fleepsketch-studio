@@ -261,8 +261,23 @@ body, html {
     border: solid 1px black;
     border-radius: 25%;
     background-color: #ff7300;
-    margin-bottom: -4.2vw;
-    margin-top: .8vw;
+    
+}
+
+.speed-container{
+    width: 5.5vw;
+    height: 5.5vw;
+    border: solid 1px black;
+    border-radius: 25%;
+    background-color: #ff7300;
+}
+
+.loop-container{
+    width: 5.5vw;
+    height: 5.5vw;
+    border: solid 1px black;
+    border-radius: 25%;
+    background-color: #ff7300;
 }
 
 .play-container img{
@@ -279,4 +294,32 @@ body, html {
     justify-content: center;
     flex-grow: 1;
     width: 100%;
+}
+
+.control-bar {
+
+    margin-bottom: -3.5vw;
+    margin-top: .8vw;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.control-bar > div {
+    flex: 1; /* Hace que cada elemento tome el mismo espacio disponible */
+    text-align: center; /* Centra el contenido dentro de cada div */
+    margin: 0 2vw;
+}
+
+.frame-counter{
+height: 1vw;
+width: 1vw;
+border: solid 1px black;
+height: 100%;
+width: 100%
+}
+
+.frame-counter-container {
+    margin-bottom: .5vw; /* Asegurarse de que no haya margen inferior */
+    margin-top: -2vw; /* Ajustar esto según sea necesario para mover hacia arriba */
 }
