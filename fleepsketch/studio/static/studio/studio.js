@@ -1,10 +1,11 @@
 import { availablePatterns, getPattern, setCustomCursor, generatePatternList } from './patterns.js';
-
 document.addEventListener('DOMContentLoaded', () => {
     generatePatternList(availablePatterns);
 
     const pencilCanvas = document.querySelector('#pencilCanvas');
     const brushCanvas = document.querySelector('#brushCanvas');
+    const animationCanvas = document.getElementById('animation-displayer');
+    
     const canvases = document.querySelectorAll('canvas');
     const toolBtns = document.querySelectorAll('.tool-controls-container .control-button');
     const sizeSelector = document.querySelectorAll('.sizes-container .size');
@@ -32,20 +33,24 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentWidth = 1;
 
 
-    
-
     canvases.forEach(canvas => {
         setCustomCursor(canvas, currentWidth);
     });
 
     const pencilCtx = pencilCanvas.getContext('2d');
     const brushCtx = brushCanvas.getContext('2d');    
+    const animationCtx = animationCanvas.getContext('2d'); // Añadido
 
     function resizeCanvas() {
-        pencilCanvas.height = container.clientHeight;
-        pencilCanvas.width = container.clientWidth;
-        brushCanvas.height = container.clientHeight;
-        brushCanvas.width = container.clientWidth;
+        const containerHeight = container.clientHeight;
+        const containerWidth = container.clientWidth;
+
+        pencilCanvas.height = containerHeight;
+        pencilCanvas.width = containerWidth;
+        brushCanvas.height = containerHeight;
+        brushCanvas.width = containerWidth;
+        animationCanvas.height = containerHeight; // Añadido
+        animationCanvas.width = containerWidth; // Añadido
     }
 
     resizeCanvas();
@@ -125,7 +130,6 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.fillStyle = pattern;
     }
 
-
     clearBtn.addEventListener('click', () => {
         pencilCtx.clearRect(0, 0, pencilCanvas.width, pencilCanvas.height);
         brushCtx.clearRect(0, 0, brushCanvas.width, brushCanvas.height);
@@ -140,13 +144,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 sizeSelector.forEach(b => b.classList.remove('current-brush'));
                 pencilSizeDefault.classList.add('current-brush');
                 patternTrigger.classList.add('not-active');
-                                divPatterns.classList.add('not-active');
-
+                divPatterns.classList.add('not-active');
 
                 pencilColorTool.classList.remove('not-active');
                 pencilSizes.classList.remove('not-active');
                 hide.classList.remove('not-active');
-
 
                 brushSizes.classList.add('not-active');
                 brushColorTool.classList.add('not-active');

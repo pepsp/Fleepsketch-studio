@@ -107,25 +107,30 @@
             </div>
             
             <div class="canvas-board" id="board">
+
+                <canvas id="animation-displayer" style="position: absolute; border: 1px black solid; display: none;"></canvas>
                 <canvas id="brushCanvas" style="position:absolute;"></canvas>
                 <canvas id="pencilCanvas" style="position:absolute;"></canvas>
                 <img id="onion-skin" style="position:absolute; opacity:0.1; pointer-events:none;">
                 <script type="module" src="{% static 'studio/studio.js' %}"></script>
-        </div>
+                
+            </div>
 
         <div class="control-bar">
 
-            <div class="loop-container" id="loop">
-                <div class="loop"></div>
+            <div class="loop-container" id="loop-container">
+                <div class="loop">
+                    <img src="{% static 'studio/icons/loop.svg' %}" id="loop-icon">
+                </div>
                 </div>
 
-            <div class="play-container" id="play">
-                <img src="{% static 'studio/icons/right.svg' %}"></img>
+            <div class="play-container" id="play-container">
+                <img src="{% static 'studio/icons/play.svg' %}" id="play-icon"></img>
             </div>
 
 
-            <div class="speed-container" id="speed">
-                <div class="speed"></div>
+            <div class="speed-container" id="speed-container">
+                    <div id="speed-display">X1</div>
             </div>
 
     
