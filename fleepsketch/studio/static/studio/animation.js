@@ -10,6 +10,8 @@ let onionSkin = true;
 const canvas1 = document.getElementById('pencilCanvas');
 const canvas2 = document.getElementById('brushCanvas');
 const animationCanvas = document.getElementById('animation-displayer');
+const onionSkinImg = document.getElementById('onion-skin');
+
 
 let previousFrameBtn = document.getElementById('prev-frame');
 let nextFrameBtn = document.getElementById('next-frame');
@@ -63,28 +65,25 @@ function showNextFrame() {
         frameCount++;
         currentFrameIndex++;
         clearCanvas();
-        displayOnionSkin(currentFrameIndex - 1);
         updateFrameDisplay();
+        displayOnionSkin(currentFrameIndex);
     } else {
         currentFrameIndex++;
         displayFrame(currentFrameIndex);
         updateFrameDisplay();
-        displayOnionSkin(currentFrameIndex - 1);
     }
 }
 
 function showPreviousFrame() {
-    if (currentFrameIndex == 0) {
-        displayOnionSkin('hide');
-        return;
-    } else {
+    if(currentFrameIndex == 0){
+        return
+    }else{
         saveFrame();
         currentFrameIndex--;
         displayFrame(currentFrameIndex);
         updateFrameDisplay();
-        displayOnionSkin(currentFrameIndex - 1);
     }
-}
+    }
 
 function displayFrame(frame) {
     if (frames[frame]) {
@@ -109,6 +108,7 @@ function displayFrame(frame) {
 
         pencilImage.src = frameData.pencil;
         brushImage.src = frameData.brush;
+        displayOnionSkin(currentFrameIndex);
 
     } else {
         return;
@@ -120,25 +120,21 @@ function updateFrameDisplay() {
 }
 
 function displayOnionSkin(previousFrameIndex) {
-    if(onionSkin == false){
+    previousFrameIndex-=1;
+    if(onionSkin == false || previousFrameIndex < 0){
+        onionSkinImg.style.display = 'none';
         return;
     }else{
-        let onionSkinImg = document.getElementById('onion-skin');
-        if (previousFrameIndex == 'hide') {
-            onionSkinImg.style.display = 'none';
-        } else {
-            const previousFrameData = frames[previousFrameIndex];
-            if (previousFrameData) {
-                onionSkinImg.src = previousFrameData.combined;
-                onionSkinImg.style.display = 'block';
-                onionSkinImg.width = canvas2.width;
-                onionSkinImg.height = canvas2.height;
-            } else {
-                onionSkinImg.style.display = 'none';
-            }
+    onionSkinImg.style.display = 'block';
+    const previousFrameData = frames[previousFrameIndex];
+    if (previousFrameData) {
+        onionSkinImg.src = previousFrameData.combined;
+        onionSkinImg.width = canvas2.width;
+        onionSkinImg.height = canvas2.height;
         }
     }
 }
+
 
 function toggleLoop() {
     console.log(loop)
@@ -186,11 +182,12 @@ async function updateAnimation() {
     }
 
     currentFrameIndex++;
-    if (currentFrameIndex >= frames.length) {
+    if (currentFrameIndex > frameCount) {
         if (loop) {
             currentFrameIndex = 0;
         } else {
             stopAnimation();
+            playIcon.src = 'static/studio/icons/play.svg'
             return;
         }
     }
@@ -206,7 +203,9 @@ function startAnimation() {
         updateAnimation();
         canvas1.style.display = 'none';
         canvas2.style.display = 'none';
+        onionSkinImg.style.display = 'none';
         animationCanvas.style.display = 'block';
+        playIcon.src = 'static/studio/icons/pause.svg'
     }
 }
 
@@ -214,9 +213,14 @@ function stopAnimation() {
     if (isPlaying) {
         isPlaying = false;
         cancelAnimationFrame(currentFrameIndex);
+        const animationCtx = animationCanvas.getContext('2d');
+        animationCtx.clearRect(0, 0, animationCanvas.width, animationCanvas.height);
+
         canvas1.style.display = 'block';
         canvas2.style.display = 'block';
+        onionSkinImg.style.display = 'block';
         animationCanvas.style.display = 'none';
+        playIcon.src = 'static/studio/icons/play.svg'
         displayFrame(currentFrameIndex);
     }
 }
