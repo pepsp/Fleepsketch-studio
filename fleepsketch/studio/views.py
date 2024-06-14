@@ -6,12 +6,13 @@ import json
 import base64
 from PIL import Image
 import tempfile
+import shutil  # Added for removing non-empty directories
 
 def process_frames(request):
     if request.method == 'POST':
         try:
             data = json.loads(request.body)
-            frame_rate = data.get('frame_rate')
+            frame_rate = data.get('frameRate')
             frames = data.get('finalFrames')
 
             # Guardar los fotogramas temporalmente
@@ -35,19 +36,21 @@ def process_frames(request):
                 with Image.open(first_frame) as img:
                     width, height = img.size
 
+                if height % 2 != 0:
+                    height += 1  # Padding the height to make it divisible by 2 (New change here)
+
                 # Convertir los fotogramas a mp4
                 output_path = os.path.join(tempfile.gettempdir(), 'output.mp4')
                 (
                     ffmpeg
-                    .input(os.path.join(temp_dir, 'frame_%04d.png'), framerate=frame_rate, s=f'{width}x{height}')
-                    .output(output_path)
+                    .input(os.path.join(temp_dir, 'frame_%04d.png'), framerate=frame_rate)
+                    .filter('pad', width, height)  # Apply padding filter if necessary (New change here)
+                    .output(output_path, vcodec='libx264', pix_fmt='yuv420p')
                     .run(overwrite_output=True)  # Asegúrate de que se sobrescriba el archivo si ya existe
                 )
 
-                # Limpiar los fotogramas temporales
-                for frame_path in frame_paths:
-                    os.remove(frame_path)
-                os.rmdir(temp_dir)
+                # Limpiar los fotogramas temporales y directorio
+                shutil.rmtree(temp_dir)  # Use shutil.rmtree to remove the entire directory (New change here)
 
                 with open(output_path, 'rb') as f:
                     response = HttpResponse(f.read(), content_type='video/mp4')

@@ -6,7 +6,7 @@ let isPlaying = false;
 let speedLvl = 1;
 let playbackSpeed = 500; // 500 ms per frame
 let frameRate =  1000 / playbackSpeed;
-console.log(frameRate)
+console.log(`Framerate: ${frameRate}`)
 let loop = true;
 let onionSkin = true;
 
@@ -166,14 +166,17 @@ function changeSpeed() {
         playbackSpeed = 500;
         speedIcon.textContent = 'X1';
     }else if(speedLvl == 2){
-        playbackSpeed = 300;
+        playbackSpeed = 250;
         speedIcon.textContent = 'X2';
     }else if(speedLvl == 3){
         playbackSpeed = 100;
         speedIcon.textContent = 'X3';
     }
+    frameRate= 1000 / playbackSpeed;
     console.log('Speed LVL: ', speedLvl);
     console.log('Playback speed: ', playbackSpeed,'ms');
+    console.log(`Framerate: ${frameRate}`)
+
 }
 
 function loadImage(src) {
@@ -274,7 +277,7 @@ async function downloadVideo() {
 
     const data = {
         finalFrames: finalFrames.map(frame => frame.split(',')[1]),
-        frameRate: frameRate
+        frameRate: parseInt(frameRate)
     };
 
     const cookies = getCookies(); // Get cookies
