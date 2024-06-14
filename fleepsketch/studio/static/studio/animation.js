@@ -1,9 +1,12 @@
 const frames = [{ frame: 0, combined: null, pencil: null, brush: null }];
+const finalFrames = [];
 let frameCount = 0;
 let currentFrameIndex = 0;
 let isPlaying = false;
 let speedLvl = 1;
 let playbackSpeed = 500; // 500 ms per frame
+let frameRate =  1000 / playbackSpeed;
+console.log(frameRate)
 let loop = true;
 let onionSkin = true;
 
@@ -11,23 +14,30 @@ const canvas1 = document.getElementById('pencilCanvas');
 const canvas2 = document.getElementById('brushCanvas');
 const animationCanvas = document.getElementById('animation-displayer');
 const onionSkinImg = document.getElementById('onion-skin');
+const saveBtn = document.getElementById('save');
 
 
 let previousFrameBtn = document.getElementById('prev-frame');
 let nextFrameBtn = document.getElementById('next-frame');
 
+
 let playBtn = document.getElementById('play-container');
 let playIcon = document.getElementById('play-icon');
+
 
 let loopBtn = document.getElementById('loop-container');
 let loopIcon = document.getElementById('loop-icon');
 
+
 let speedBtn = document.getElementById('speed-container');
 let speedIcon = document.getElementById('speed-display');
+
 
 let frameDisplay = document.getElementById('frame-display');
 
 updateFrameDisplay();
+
+
 
 function clearCanvas() {
     let canvas1Ctx = canvas1.getContext('2d');
@@ -42,6 +52,9 @@ function convertCanvasesToImage() {
     combinedCanvas.height = canvas2.height;
     const combinedCtx = combinedCanvas.getContext('2d');
 
+    combinedCtx.fillStyle = '#FFF'; // Color blanco
+    combinedCtx.fillRect(0, 0, combinedCanvas.width, combinedCanvas.height);
+
     combinedCtx.drawImage(canvas2, 0, 0);
     combinedCtx.drawImage(canvas1, 0, 0);
 
@@ -49,7 +62,7 @@ function convertCanvasesToImage() {
     return { canvas1, canvas2, combinedImage };
 }
 
-function saveFrame() {
+export function saveFrame() {
     const { canvas1, canvas2, combinedImage } = convertCanvasesToImage();
     frames[currentFrameIndex] = {
         frame: currentFrameIndex,
@@ -67,6 +80,7 @@ function showNextFrame() {
         clearCanvas();
         updateFrameDisplay();
         displayOnionSkin(currentFrameIndex);
+        console.log(frames);
     } else {
         currentFrameIndex++;
         displayFrame(currentFrameIndex);
@@ -181,6 +195,8 @@ async function updateAnimation() {
         animationCtx.drawImage(combinedImage, 0, 0);
     }
 
+    updateFrameDisplay();
+
     currentFrameIndex++;
     if (currentFrameIndex > frameCount) {
         if (loop) {
@@ -213,20 +229,98 @@ function stopAnimation() {
     if (isPlaying) {
         isPlaying = false;
         cancelAnimationFrame(currentFrameIndex);
-        const animationCtx = animationCanvas.getContext('2d');
-        animationCtx.clearRect(0, 0, animationCanvas.width, animationCanvas.height);
-
+        
         canvas1.style.display = 'block';
         canvas2.style.display = 'block';
         onionSkinImg.style.display = 'block';
         animationCanvas.style.display = 'none';
-        playIcon.src = 'static/studio/icons/play.svg'
+
+        const animationCtx = animationCanvas.getContext('2d');
+        animationCtx.clearRect(0, 0, animationCanvas.width, animationCanvas.height);
+        
+        playIcon.src = 'static/studio/icons/play.svg';
+        currentFrameIndex = 0;
         displayFrame(currentFrameIndex);
+        updateFrameDisplay();
     }
 }
 
+
+function getCookies() {
+    return document.cookie.split(';').reduce((cookies, cookie) => {
+        const [name, value] = cookie.trim().split('=').map(decodeURIComponent);
+        try {
+            return {
+                ...cookies,
+                [name]: JSON.parse(value)
+            };
+        } catch (e) {
+            return {
+                ...cookies,
+                [name]: value
+            };
+        }
+    }, {});
+}
+
+async function downloadVideo() {
+    // Assuming playbackSpeed and frames are defined globally or passed to this function
+    const frameRate = 1000 / playbackSpeed;
+
+    const finalFrames = [];
+    frames.forEach(frame => {
+        finalFrames.push(frame.combined);
+    });
+
+    const data = {
+        finalFrames: finalFrames.map(frame => frame.split(',')[1]),
+        frameRate: frameRate
+    };
+
+    const cookies = getCookies(); // Get cookies
+
+    try {
+        const response = await fetch('/process_frames/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': cookies['csrftoken'] // Example: Adding a CSRF token from cookies, if required
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error('Failed to process frames:', errorData.error);
+            return;
+        }
+
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        a.download = 'animation.mp4';
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+    } catch (error) {
+        console.error('Error while downloading video:', error);
+    }
+}
+
+
+
 nextFrameBtn.addEventListener('click', showNextFrame);
 previousFrameBtn.addEventListener('click', showPreviousFrame);
+saveBtn.addEventListener('click', () =>{
+    frameRate = 1000 / playbackSpeed;
+    downloadVideo();
+})
+
+
+
+
 playBtn.addEventListener('click', () => {
     if (isPlaying) {
         stopAnimation();
@@ -234,13 +328,22 @@ playBtn.addEventListener('click', () => {
         startAnimation();
     }
 });
+
 loopBtn.addEventListener('click', toggleLoop);
 speedBtn.addEventListener('click', changeSpeed);
+
+
 
 document.addEventListener('keydown', function (event) {
     if (event.key === 'ArrowRight') {
         showNextFrame();
     } else if (event.key === 'ArrowLeft') {
         showPreviousFrame();
+    } else if (event.key === ' ') {
+        if (isPlaying) {
+            stopAnimation();
+        } else {
+            startAnimation();
+        }
     }
 });

@@ -1,4 +1,6 @@
 import { availablePatterns, getPattern, setCustomCursor, generatePatternList } from './patterns.js';
+import { saveFrame } from './animation.js';
+
 document.addEventListener('DOMContentLoaded', () => {
     generatePatternList(availablePatterns);
 
@@ -24,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const patternTrigger = document.querySelector('.trigger-container');
     const divPatterns = document.getElementById('patterns-container');
     let patterns;
-    console.log(patterns)
 
     let currentPattern = 'square-sm';
     let pencilColor = "#000000";
@@ -106,6 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const ctx = currentTool === 'brush' ? brushCtx : pencilCtx;
 
             ctx.lineWidth = currentWidth;
+            
             canvases.forEach(canvas => {
                 setCustomCursor(canvas, currentWidth);
             });
@@ -189,6 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             currentTool = btn.id;
             currentWidth = btn.dataset.width;
+
             canvases.forEach(canvas => {
                 setCustomCursor(canvas, currentWidth);
             });
@@ -212,9 +215,11 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', () => {
             sizeSelector.forEach(b => b.classList.remove('current-brush'));
             currentWidth = btn.dataset.size;
+
             canvases.forEach(canvas => {
                 setCustomCursor(canvas, currentWidth);
             });
+            
             btn.classList.add('current-brush');
         });
     });
@@ -237,6 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     pencilCanvas.addEventListener('mousedown', startPosition);
     pencilCanvas.addEventListener('mouseup', finishPosition);
+    pencilCanvas.addEventListener('mouseup', saveFrame);
     pencilCanvas.addEventListener('mousemove', draw);
     pencilCanvas.addEventListener('mouseleave', finishPosition);
 

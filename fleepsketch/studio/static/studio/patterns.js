@@ -1,5 +1,5 @@
 // Definición de patrones
-export function createSquarePattern(ctx, baseColor, squareSize = 5) {
+function createSquarePattern(ctx, baseColor, squareSize = 5) {
     const patternCanvas = document.createElement('canvas');
     patternCanvas.width = squareSize * 2;
     patternCanvas.height = squareSize * 2;
@@ -59,7 +59,7 @@ function createStarsPattern(ctx, baseColor) {
 
 
 
-export function createHeartsPattern(ctx, baseColor, heartSize = 10) {
+function createHeartsPattern(ctx, baseColor, heartSize = 10) {
     const patternCanvas = document.createElement('canvas');
     patternCanvas.width = heartSize * 2;
     patternCanvas.height = heartSize * 2;
@@ -90,11 +90,11 @@ export function createHeartsPattern(ctx, baseColor, heartSize = 10) {
     return ctx.createPattern(patternCanvas, 'repeat');
 }
 
-export function createSquareSmallPattern(ctx, baseColor, squareSize = 2) {
+function createSquareSmallPattern(ctx, baseColor, squareSize = 2) {
     return createSquarePattern(ctx, baseColor, squareSize);
 }
 
-export function createVerticalLinesPattern(ctx, baseColor) {
+function createVerticalLinesPattern(ctx, baseColor) {
     const patternCanvas = document.createElement('canvas');
     patternCanvas.width = 10;
     patternCanvas.height = 10;
