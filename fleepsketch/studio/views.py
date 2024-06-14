@@ -36,21 +36,26 @@ def process_frames(request):
                 with Image.open(first_frame) as img:
                     width, height = img.size
 
+                # Ensure width is divisible by 2
+                if width % 2 != 0:
+                    width += 1
+
+                # Ensure height is divisible by 2
                 if height % 2 != 0:
-                    height += 1  # Padding the height to make it divisible by 2 (New change here)
+                    height += 1
 
                 # Convertir los fotogramas a mp4
                 output_path = os.path.join(tempfile.gettempdir(), 'output.mp4')
                 (
                     ffmpeg
                     .input(os.path.join(temp_dir, 'frame_%04d.png'), framerate=frame_rate)
-                    .filter('pad', width, height)  # Apply padding filter if necessary (New change here)
+                    .filter('pad', width, height)  # Aplicar el filtro de relleno si es necesario
                     .output(output_path, vcodec='libx264', pix_fmt='yuv420p')
                     .run(overwrite_output=True)  # Asegúrate de que se sobrescriba el archivo si ya existe
                 )
 
                 # Limpiar los fotogramas temporales y directorio
-                shutil.rmtree(temp_dir)  # Use shutil.rmtree to remove the entire directory (New change here)
+                shutil.rmtree(temp_dir)  # Utiliza shutil.rmtree para eliminar todo el directorio
 
                 with open(output_path, 'rb') as f:
                     response = HttpResponse(f.read(), content_type='video/mp4')
