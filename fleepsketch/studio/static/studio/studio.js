@@ -25,13 +25,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const hide = document.querySelector('#hidden');
     const patternTrigger = document.querySelector('.trigger-container');
     const divPatterns = document.getElementById('patterns-container');
+    const editBtns =  document.querySelectorAll('.edit');
+    const editPanel =  document.getElementById('edit-panel');
+    const toolsContainer  = document.getElementById('tools');
+    const actionsContainer = document.getElementById('actions');
+    const canvasContainer = document.getElementById('canvas-stuff');
     let patterns;
+   
+
 
     let currentPattern = 'square-sm';
     let pencilColor = "#000000";
     let brushColor = "#000000";
     let currentTool = 'pencil';
     let currentWidth = 1;
+    let isEditing = false;
 
 
     canvases.forEach(canvas => {
@@ -239,6 +247,30 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     });
+
+    editBtns.forEach(editBtn => {
+        editBtn.addEventListener('click', () => {
+            if (isEditing == false) {
+                isEditing = true;
+                console.log(isEditing);
+                toolsContainer.classList.add('not-active');
+                actionsContainer.classList.add('not-active');
+                canvasContainer.style.display = 'none';
+                editPanel.classList.remove('not-active');
+                
+
+
+            } else if (isEditing == true) {
+                isEditing = false;
+                console.log(isEditing);
+                editPanel.classList.add('not-active');
+                toolsContainer.classList.remove('not-active');
+                actionsContainer.classList.remove('not-active');
+                canvasContainer.style.display = 'flex';
+            }
+        });
+    });
+
 
     pencilCanvas.addEventListener('mousedown', startPosition);
     pencilCanvas.addEventListener('mouseup', finishPosition);

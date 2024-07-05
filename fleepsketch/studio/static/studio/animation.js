@@ -10,11 +10,14 @@ console.log(`Framerate: ${frameRate}`)
 let loop = true;
 let onionSkin = true;
 
+
 const canvas1 = document.getElementById('pencilCanvas');
 const canvas2 = document.getElementById('brushCanvas');
 const animationCanvas = document.getElementById('animation-displayer');
 const onionSkinImg = document.getElementById('onion-skin');
 const saveBtn = document.getElementById('save');
+const edit = document.getElementById('edit');
+
 
 
 let previousFrameBtn = document.getElementById('prev-frame');
@@ -336,6 +339,20 @@ loopBtn.addEventListener('click', toggleLoop);
 speedBtn.addEventListener('click', changeSpeed);
 
 
+function showCarrousel(){
+    const carouselImages = document.getElementById('carouselImages');
+    carouselImages.innerHTML='';
+
+    frames.forEach(imageSrc => {
+    const img = document.createElement('img');
+    img.src = imageSrc.combined;
+    carouselImages.appendChild(img);
+});
+}
+
+edit.addEventListener('click', showCarrousel);
+
+
 
 document.addEventListener('keydown', function (event) {
     if (event.key === 'ArrowRight') {
@@ -350,3 +367,4 @@ document.addEventListener('keydown', function (event) {
         }
     }
 });
+

@@ -15,7 +15,11 @@
     <div class="app-container">
         <div class="canvas-container dotted">
 
-            <div class="tool-controls-container">
+        <div class="not-active" id="edit-panel">
+            {% include "studio/edit.html" %}
+        </div>
+
+            <div class="tool-controls-container" id="tools">
                 
                 <div class="controls-wrapper">
                     <div class="control-button active" id="pencil" data-width="1"><img src="{% static 'studio/icons/pencil.svg' %}" />                        
@@ -82,15 +86,15 @@
             </div>
 
         
-            <div class="action-controls-container">
+            <div class="action-controls-container" id="actions">
                 <button class="control-button sm" id="clear">CLEAR</button>
-                <button class="control-button sm" id="edit">EDIT</button>
+                <button class="control-button sm edit" id="edit">EDIT</button>
                 <button class="control-button sm" id="save">SAVE</button>
             </div>
 
 
 
-    <div class="container">
+    <div class="container" id="canvas-stuff">
 
         <div  class="frame-icon" id="prev-frame">
             <img src="{% static 'studio/icons/left.svg' %}">
