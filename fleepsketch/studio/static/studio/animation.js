@@ -348,6 +348,8 @@ function showCarrousel(){
     img.src = imageSrc.combined;
     carouselImages.appendChild(img);
 });
+
+
 }
 
 edit.addEventListener('click', showCarrousel);
